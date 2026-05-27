@@ -22,21 +22,40 @@
       align-items: center;
       justify-content: center;
       /* 100dvh shrinks when mobile browser chrome appears */
-      height: 100dvh;
       height: 100vh; /* fallback for older browsers */
+      height: 100dvh;
+    }
+
+    picture {
+      display: block;
+      width: 100%;
+      height: 100vh;
+      height: 100dvh;
     }
 
     img {
       display: block;
       width: 100%;
+      /*
       height: 100vh;
       height: 100dvh;
+      */
       object-fit: cover;
       object-position: center;
+    }
+
+    @media (min-width: 768px) {
+      img {
+       /* object-position: top left;
+       */
+      }
     }
   </style>
 </head>
 <body>
-  <img src="image.png" alt="" />
+  <picture>
+    <source media="(min-width: 768px)" srcset="horizontalImage.jpg" />
+    <img src="image.png" alt="" />
+  </picture>
 </body>
 </html>
