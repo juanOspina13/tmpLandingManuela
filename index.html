@@ -1,9 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Manuela Serna Collection</title>
+  <title>Manuela Serna — Próximamente</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Inter:wght@300;400;500&display=swap"
+    rel="stylesheet"
+  />
   <style>
     *, *::before, *::after {
       box-sizing: border-box;
@@ -11,51 +17,216 @@
       padding: 0;
     }
 
+    :root {
+      --bg: #0a0a0a;
+      --fg: #f5f1ea;
+      --accent: #c9a96e;
+    }
+
     html, body {
       width: 100%;
       height: 100%;
-      background: #000;
+      background: var(--bg);
+      color: var(--fg);
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      overflow: hidden;
     }
 
-    body {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      /* 100dvh shrinks when mobile browser chrome appears */
-      height: 100vh; /* fallback for older browsers */
-      height: 100dvh;
-    }
-
-    picture {
-      display: block;
+    .hero {
+      position: relative;
       width: 100%;
       height: 100vh;
       height: 100dvh;
+      overflow: hidden;
     }
 
-    img {
-      display: block;
+    .hero picture,
+    .hero img {
+      position: absolute;
+      inset: 0;
       width: 100%;
-      max-height: 100vh;
-      /*
-      height: 100dvh;
-      object-fit: cover;
-      */
-      object-position: center;
+      height: 100%;
+      display: block;
     }
 
-    @media (min-width: 768px) {
-      img {
-       /* object-position: top left;
-       */
+    .hero img {
+      object-fit: cover;
+      object-position: center;
+      animation: kenburns 18s ease-out forwards;
+    }
+
+    @keyframes kenburns {
+      from { transform: scale(1.08); }
+      to   { transform: scale(1);    }
+    }
+
+    /* Gradient overlay for legibility */
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.15) 35%, rgba(0,0,0,0.75) 100%);
+      pointer-events: none;
+    }
+
+    /* Top nav */
+    .nav {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 3;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.5rem 2rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      font-weight: 400;
+    }
+
+    .nav__brand {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      letter-spacing: 0.35em;
+    }
+
+    .nav__links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav__links a {
+      color: var(--fg);
+      text-decoration: none;
+      opacity: 0.85;
+      transition: opacity 0.25s ease;
+    }
+
+    .nav__links a:hover { opacity: 1; }
+
+    /* Centered hero content */
+    .hero__content {
+      position: relative;
+      z-index: 2;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 0 1.5rem;
+      animation: fadeUp 1.4s ease-out 0.3s both;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0);    }
+    }
+
+    .eyebrow {
+      font-size: 0.7rem;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.25rem;
+    }
+
+    .hero__title {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(2.5rem, 8vw, 6rem);
+      line-height: 1.05;
+      letter-spacing: 0.02em;
+      margin-bottom: 1rem;
+    }
+
+    .hero__title em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .hero__tagline {
+      max-width: 38ch;
+      font-size: clamp(0.9rem, 1.2vw, 1.05rem);
+      font-weight: 300;
+      line-height: 1.6;
+      opacity: 0.85;
+      margin-bottom: 2.25rem;
+    }
+
+    .cta {
+      display: inline-block;
+      padding: 0.9rem 2.25rem;
+      border: 1px solid var(--fg);
+      color: var(--fg);
+      text-decoration: none;
+      font-size: 0.75rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+
+    .cta:hover {
+      background: var(--fg);
+      color: var(--bg);
+    }
+
+    /* Bottom meta strip */
+    .hero__meta {
+      position: absolute;
+      bottom: 1.5rem;
+      left: 0;
+      right: 0;
+      z-index: 2;
+      display: flex;
+      justify-content: space-between;
+      padding: 0 2rem;
+      font-size: 0.7rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      opacity: 0.7;
+    }
+
+    @media (max-width: 767px) {
+      .nav,
+      .hero__content,
+      .hero__meta {
+        display: none;
+      }
+      .hero::after {
+        background: none;
       }
     }
   </style>
 </head>
 <body>
-  <picture>
-    <source media="(min-width: 768px)" srcset="horizontalImage.jpg" />
-    <img src="image.png" alt="" />
-  </picture>
+  <section class="hero">
+    <picture>
+      <source media="(min-width: 768px)" srcset="horizontalImage.jpg" />
+      <img src="image.png" alt="Manuela Serna Collection" />
+    </picture>
+
+    <header class="nav">
+      <div class="nav__brand">Manuela Serna</div>
+    </header>
+
+    <div class="hero__content">
+      <span class="eyebrow">Próximamente — 2026</span>
+      <h1 class="hero__title">Se está construyendo<br /> <em>algo especial</em>.</h1>
+      <p class="hero__tagline">
+        Una nueva colección está tomando forma. Detalle a detalle, en silencio, con intención.
+      </p>
+    </div>
+
+    <div class="hero__meta">
+      <span>Manuela Serna · 2026</span>
+      <span>Pronto ↓</span>
+    </div>
+  </section>
 </body>
 </html>
